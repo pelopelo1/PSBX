@@ -1,0 +1,101 @@
+---
+title: "Les petits tuto rapido: Cas Ggplot2"
+date: "10/12/2020"
+author: "Teddy Leandre"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **DEMARRER AVEC GGPLOT2** {#anchor}
+
+## I) INTRODUCTION
+*`Ggplot2` est un paquet R conçu spécialement pour la visualisation de données et permettant une meilleure analyse exploratoire des données. Il fournit des tracés magnifiques et sans souci qui prennent soin des détails les plus infimes comme le dessin de légendes et leur représentation. Les tracés peuvent être créés de manière itérative et édités ultérieurement.    
+
+ Ce logiciel est conçu pour fonctionner par couches, en commençant par une couche montrant les données brutes collectées lors de l’analyse exploratoire des données avec R, puis en ajoutant des couches d’annotations et de résumés statistiques. Même les utilisateurs les plus expérimentés de R ont besoin d’aide pour créer des graphiques élégants. 
+  
+  Cette bibliothèque est un outil phénoménal pour la création de graphiques dans R mais même après de nombreuses années d’utilisation quasi quotidienne, nous devons toujours nous référer à notre “Cheat Sheet”. Cet ensemble fonctionne sous une grammaire profonde appelée “Grammaire des graphiques” qui est composée d’un ensemble de composants indépendants qui peuvent être créés de nombreuses façons. La “grammaire des graphiques” est la seule raison qui rend `ggplot2` très puissant, car le développeur R n’est pas limité à un ensemble de graphiques prédéfinis qui est utilisé dans d’autres paquets. La grammaire comprend un ensemble simple de règles et de principes de base.   
+  En 2005, Wilkinson a créé ou plutôt initié le concept de grammaire des graphiques pour décrire les caractéristiques profondes qui sont incluses entre tous les graphiques statistiques. Il se concentre sur la première des couches, ce qui inclut l’adaptation des caractéristiques incorporées avec R.*  
+
+
+
+### Installation et exécution de ggplot2
+Pour installer et charger le paquet `ggplot2`
+```{r eval=FALSE}
+# install from CRAN *The comprehensive R archive network*
+install.packages("ggplot2")
+```
+
+***
+
+## II) PERSONNALISATION DES AXES DES TITRES ET DES LEGENDES
+### Dans cette rubrique on expliquera comment personnaliser les axes et le titre  grâce à `ggplot2`
+
+Nous utiliserons les étapes suivantes pour travailler sur les axes x et y en utilisant le paquet ggplot2 de R.
+Il est toujours important de charger la bibliothèque pour obtenir les fonctionnalités du paquet.
+```{r ggplot}
+#load ggplot2
+library (ggplot2)
+
+#Read in dataset
+data(iris)
+```
+
+#### Créer les points de trame
+
+Comme nous l'avons vu dans le chapitre précédent, nous allons créer une intrigue avec des points. En d'autres termes, il s'agit d'une parcelle dispersée.
+
+```{r Echo = FALSE}
+# Le résultat de l'utilisation de la fonction plot  sur le data set *iris3* sera donné en dessous :
+plot(iris3)
+# Ici on affectera le dataset *iris* sur lequel on travaillera ensuite à une fonction p en positionnant le nom des axes et du titre
+p <- ggplot(iris, aes(x = Sepal.Length, y = Petal.Length, title("Type d'espèces"), colour=Species)) + geom_point()
+```
+
+***
+
+#### Surligner et cocher les points
+
+Tracez les marqueurs avec les coordonnées mentionnées des axes x et y comme indiqué ci-dessous. Il s'agit d'ajouter du texte, de répéter du texte, de mettre en évidence une zone particulière et d'ajouter un segment comme suit:
+
+
+```{r echo=p}
+# Ajout de texte
+p + annotate("text", x = 6, y = 5, label = "text")
+
+# Répétition d'un texte en fonction des coordonées
+p + annotate("text", x = 4:6, y = 5:7, label = "text")
+
+# Mettre en avant un zone en particuliers via un encadrement
+p + annotate("rect", xmin = 5, xmax = 7, ymin = 4, ymax = 6, alpha = .5)
+
+# Segmenter le nuage de point
+p + annotate("segment", x = 5, xend = 7, y = 4, yend = 5, colour = "black")
+
+```
+***
+
+#### Modifier le titre du graphique 
+```{r}
+# Ici on affectera de nouveau terme pour les axes ainsi que pour le titre
+p + ggtitle("Graphique sur les différentes espèces de pétale et de sépale") + xlab("Longueur des sépales") + ylab("Longueur des pétales") 
+```
+
+***
+
+*"La science, aujourd'hui, cherchera une source d'inspiration au-dessus d'elle ou périra."* **Simone Weil**
+
+C'est pourquoi dans le cadre de mon mini tutoriel je tiens à citer mes sources : 
+![caption](ampoule.png)[Source 1](https://riptutorial.com/fr/r/topic/1334/ggplot2) || [Source 2](http://www.sthda.com/french/wiki/ggplot2-titres-titre-principal-titre-des-axes-et-legendes-logiciel-r-et-visualisation-de-donnees)
+
+
+![Caption](favicon-github.ico) [Mon Github](https://github.com/pelopelo1/PSBX.git)
+
+Revenir à [Démarrer avec ggplot2](#anchor)
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
