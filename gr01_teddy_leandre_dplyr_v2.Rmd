@@ -1,0 +1,69 @@
+---
+title: "Les petits tuto rapido : Cas Dplyr"
+date: "10/12/2020"
+author: "Teddy Leandre"
+output: 
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **I) Petite Introduction** {#anchor}
+*`dplyr` est une itération de plyr qui fournit des fonctions flexibles basées sur "ver" pour manipuler des données dans R. La dernière version de dplyr peut être téléchargée depuis CRAN en utilisant la commande ci-dessous. *
+```{r eval=FALSE}
+# install `dplyr` and `magrittr` from CRAN "The comprehensive R archive network" 
+install.package("dplyr")
+install.packages("magrittr")
+```
+
+***
+
+# **II) Différentes fonctionnalités de `Dplyr`**
+Cette section fournit une vue d'ensemble de ce qu'est dplyr et pourquoi un développeur peut vouloir l'utiliser. 
+Dans ces exemples on utilisera le dataset `iris` => voir `help("iris")` pour plus d'information. 
+Pour démontrer l'utilisation de `dplyr` on utilisera les fonctions `filter` et `mutate` ainsi que le paquet `magrittr` pour utiliser la fonction pipe `%>%`.
+
+Il est toujours important de charger la bibliothèque pour obtenir les fonctionnalités du paquet.
+```{r  echo=TRUE}
+# Load dplyr 
+library(dplyr)
+# Load magrittr (complementary package to use with dplyr)
+library(magrittr)
+
+```
+  + ### Pour filtrer des données statistiques en fonction de certains critères, nous utilisons un `filter`. 
+```{r dplyr1}
+p <- iris
+# On filtre les espèces qui correspondent à l'espèce "versicolor" et qui sont supérieur à 3 cm en longueur et en largeur
+Species_versicolor <- p %>% filter(Species == "versicolor", Sepal.Length > 3, Sepal.Width > 3)
+```
+  ***
+  
+  + ### Pour ajouter de nouvelles variables ou modifier des variables existantes, nous utilisons `mutate`.
+```{r dplyr2}
+# On ajoute une nouvelle variable nommer `Sepal.dimension` qui mesure l'aire des sépales d'une fleur pour l'espèce "versicolor"
+New_species_versicolor <- Species_versicolor %>%
+  select(Sepal.Length , Sepal.Width, Species) %>%
+  mutate(Sepal.dimension = Sepal.Length * Sepal.Width )
+New_species_versicolor
+```
+***
+  
+*"La science, aujourd'hui, cherchera une source d'inspiration au-dessus d'elle ou périra."* **Simone Weil**
+
+C'est pourquoi dans le cadre de mon mini tutoriel je tiens à citer mes sources : 
+![caption](ampoule.png)[Ma source](https://riptutorial.com/fr/r/topic/4250/dplyr)
+    
+
+![Caption](favicon-github.ico) [Mon Github](https://github.com/pelopelo1/PSBX.git)
+
+Revenir à [L'introduction](#anchor)
+
+
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
