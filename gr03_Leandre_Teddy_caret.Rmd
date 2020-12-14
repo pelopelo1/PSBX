@@ -1,0 +1,85 @@
+---
+title: "caret"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r eval=FALSE}
+# On télécharge le paquet
+install.packages("caret")
+
+```
+```{r caret, message=FALSE}
+# on charge le paquet
+library(caret)
+
+# On utilisera le dataset `mtcars`
+data("cars")
+# Utilisation de `set.seed()`
+set.seed(300)
+
+# On imposera la loi de partition des données
+
+trainIndex <- createDataPartition(cars$Price, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+
+# On observe le contenu des 6 première ligne du tableau
+head(cars)
+
+# On vérifie le contnue du data set
+str(cars)
+
+# On établie les partitions de test et d'entrainement
+carsTrain <- cars[trainIndex,]
+carsTest <- cars[-trainIndex,]
+
+# zone de test
+fitControl <- trainControl(## 5-fold CV
+  method = "repeatedcv",
+  number = 5,
+  # Répeter 5 fois
+  repeats = 5)
+
+set.seed(300)
+
+t_before <- Sys.time()
+Fit1 <- train(Price ~ ., data = carsTrain, 
+              method = "rf", # methode d'arbre de décision random forest(rf), on peut tester "nnet" aussi
+              trControl = fitControl,
+              verbose = FALSE)
+t_after <- Sys.time() 
+duree <- t_after - t_before # code pour voir combien de temps ca va durée
+print(duree) 
+
+# on teste le modèle
+Fit1 
+
+# Définir le modèle de prédiction pour le test
+prediction_carsTest    <- predict(Fit1, carsTest)
+df_pred                <- data.frame(carsTest$Price,prediction_carsTest )
+
+ecart <- df_pred[,1] == df_pred[,2]
+nombre_reussites <- sum(ecart)
+nombre           <- nrow(df_pred)
+accuracy         <- nombre_reussites/nombre * 100
+
+# on utilisera le paquet ggplot2
+library(ggplot2)
+
+qplot(df_pred[,1],df_pred[,2])
+
+# Représentation graphique
+ggplot(df_pred) +
+  aes(x = carsTest.Price, fill = prediction_carsTest) +
+  geom_histogram() +
+  scale_fill_hue() +
+  labs(x = "Réalité", y = "Prévisionvision", title = "Réalité versus prevision par classe", fill = "Répartition") +
+  theme_gray()
+
+```
+
+
