@@ -1,0 +1,108 @@
+---
+title: "AstéRix_thomas_duval_rsympy"
+author: "Teddy Leandre"
+date: "23/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I.**Présentation**
+*Dans ce dossier, nous chercherons à évaluer 12 travaux comportant du code R et des concepts mathématiques. L'évaluation se fera sur la base de 5 critères de notation qui, additionné donnera une note globale sur 20 points. *  
+  
+1. Qualité du visuel du document sur 4 points  
+2. Pluralité des fonctionnalités sur 4 points    
+3. Fonctionnement du code sur 4 points
+4. Qualité des explications sur 4 points  
+5. Lisibilité du code sur 4 points   
+    
+  
+# II. Description
+Ici nous verrons l'outil `Rsympy`, c'est un paquet qui permet d'effectuer certains calculs. Le travail de Thomas DUVAL se porte sur certaines des fonctionnalités principales du paquet.  
+[Le Github évalué](https://github.com/ThomasDServant/psbx/blob/main/gr01_servant_thomas_SYMPY.pdf)
+
+
+## a. Commentaire
+La librairie rSymPy comprend un ensemble de fonctions permettant le traitement et la manipulation d'expressions mathématiques symboliques. Cette librairie nécessite l'installation des librairies rJython et rJava ainsi que l'installation d'un JDK Java afin de fonctionner pleinement. Nous allons dans ce document observer quelques exemples simples d'utilisation de cette librairie et de ces fonctions. 
+
+
+install.packages("rSymPy")
+install.packages("rJython")
+install.packages("rJava")
+
+```{r}
+library(rJava)
+library(rJython)
+library(rSymPy)
+```
+
+```
+Sys.setenv(JAVA_HOME='C:/Users/The Moneytizer/jdk-15.0.1') #indiquer chemin du dossier contenant JAVA
+```
+
+***Création de variables***
+```{r}
+sympy("var('x')") #on introduit une variable x
+sympy("y = x*x") #on introduit une variable y équivalente à x au carré
+sympy("y")
+```
+
+***Limites d'une expression***
+```{r}
+sympy("limit(1/x, x, oo)") #limite de 1/X quand x tend vers l'infini (noté; "oo")
+sympy("limit(1/x, x, 0)") #limite de 1/X quand x tend vers 0
+```
+
+***Dérivation de termes***
+```{r}
+sympy("diff(sin(2*x), x, 1)") #dérivation au premier degrés de sin(2x)
+sympy("diff(sin(2*x), x, 2)") #dérivation au second degrés de sin(2x)
+```
+
+***Décimales de Pi***
+```{r}
+sympy("pi.evalf(120)") #nous permet d'afficher les 120 premières décimales de Pi
+```
+
+***Simplification d'une expression***
+```{r}
+sympy("simplify((x**3 + x**2 - x - 1)/(x**2 + 2*x + 1))")
+```
+
+***Développement d'une expression***
+```{r}
+sympy("expand((x + 2)*(x - 3))")
+```
+
+***Factorisation d'une expression***
+```{r}
+sympy("factor(x**3 - x**2 + x - 1)")
+```
+
+***Résolution d'une équation***
+```{r}
+sympy("solve(x**2 - 2, x)") #on résout ici x^2-2=0
+```
+
+***Sources:***
+```
+Ondrej Certik, G Grothendieck (SymPy itself is by, and Contributors: Carlos J. Gil Bellosta others). n.d.
+“Package ‘rSymPy’.” https://cran.r-project.org/web/packages/rSymPy/rSymPy.pdf.
+http://www.di.fc.ul.pt/~jpn/r/symbolic/: "Symbolic Computation in R" par João Neto
+```
+## Notation  
+  
+Critère 1 : 3/4 Peut etre ameliorer. 
+
+Critère 2 : 3/4 Utilisation de fonctions essentiels mais reste simple. 
+
+Critère 3 : 4/4 tout fonctionne.
+
+Critère 4 : 3/4 Explications bref sur certaines lignes, voir pas d'explications pour certaines fonctions. Des commentaires supplementaires peuvent etre ajoutes.
+
+Critère 5 : 3/4 très simple et lisible.
+
+# III. Conclusion
+Note globale 16/20. Les fonctionalités du paquet présentés sont lisible et présentable. Les sources sont bien cités

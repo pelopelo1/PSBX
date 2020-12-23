@@ -1,0 +1,94 @@
+---
+title: "AstéRix_tarik_hakam_rsympy"
+author: "Teddy Leandre"
+date: "23/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I.**Présentation**
+*Dans ce dossier, nous chercherons à évaluer 12 travaux comportant du code R et des concepts mathématiques. L'évaluation se fera sur la base de 5 critères de notation qui, additionné donnera une note globale sur 20 points. *  
+  
+1. Qualité du visuel du document sur 4 points  
+2. Pluralité des fonctionnalités sur 4 points    
+3. Fonctionnement du code sur 4 points
+4. Qualité des explications sur 4 points  
+5. Lisibilité du code sur 4 points   
+    
+  
+# II. Description
+Ici nous verrons l'outil `Rsympy`, c'est un paquet qui permet d'effectuer certains calculs. Le travail de Tarik HAKAM se porte sur certaines des fonctionnalités principales du paquet.  
+[Le Github évalué](https://github.com/T-Hak/PSBX/blob/main/Tutoriel%20rSymPy/gr02_hakam_tarik_rsympy.pdf)
+
+
+## a. Commentaire
+```{r}
+library(rSymPy)
+```
+
+Prenons pour exemple le calcul du carré d'une matrice. [@CRAN]
+
+Pour se faire, nous définissons la variable $x$ de la façon suivante :
+
+```{r}
+sympy("var('x')")
+```
+
+
+Puis, nous définissons la fonction $y$ en fonction de $x$ telle que :
+
+\begin{equation}
+y = x \times x = x^2
+\end{equation}
+
+que l'on code de la façon suivante : 
+
+```{r}
+sympy("y = x*x")
+sympy("y")
+```
+
+Nous poursuivons par la définion de la matrice que l'on nomme $A$ en fonction des variables $x$ et $y$, de dimension $n \times n$ avec $n = 2$.
+
+Le code R est le suivant : 
+
+```{r}
+# Création de la matrice A en fonction de x et y précédemment définis
+cat(sympy("A = Matrix([[1,x], [y,1]])"), "\n")
+```
+
+La fonction **cat()** nous permet de mettre en forme notre matrice pour le rendre plus lisible.
+
+Pour finir, nous procédons au calcul du carré de la matrice $A \times A$.
+
+```{r}
+# Carré de la matrice A
+cat(sympy("A**2"), "\n")
+```
+
+Pour dernier exemple, pour illustrer les usages du package **rSymPy**, nous procédons au calcul de la limite de la fonction $\sqrt(x)$ pour $x \rightarrow \infty$ soit : 
+
+\begin{equation}
+  \lim_{x\to\infty} \sqrt(x) = \infty
+\end{equation}
+
+```{r}
+sympy("limit(sqrt(x), x, oo)")
+```
+## Notation  
+  
+Critère 1 : 2/4 Peut etre ameliorer. 
+
+Critère 2 : 2/4 Utilisation de fonctions essentiels mais reste simple. 
+
+Critère 3 : 4/4 tout fonctionne.
+
+Critère 4 : 3/4 Explications bref sur certaines lignes, voir pas d'explications pour certaines fonctions. Des commentaires supplementaires peuvent etre ajoutes.
+
+Critère 5 : 3/4 très simple et lisible.
+
+# III. Conclusion
+Note globale 14/20. Les fonctionalités du paquet présentés sont lisible et présentable. 

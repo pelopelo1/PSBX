@@ -1,0 +1,128 @@
+---
+title: "AstéRix_amine_benoucief_dplyr"
+author: "Teddy Leandre"
+date: "23/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Présentation
+*Dans ce dossier, nous chercherons à évaluer 12 travaux comportant du code R et des concepts mathématiques. L'évaluation se fera sur la base de 5 critères de notation qui, additionné donnera une note globale sur 20 points. *  
+  
+1. Qualité du visuel du document sur 4 points  
+2. Pluralité des fonctionnalités sur 4 points    
+3. Fonctionnement du code sur 4 points
+4. Lisibilité du code sur 4 points  
+5. Qualité des explications sur 4 points      
+  
+# II. Description
+Ici nous verrons l'outil `dplyr`, c'est un paquet qui permet d'effectuer certaines manipulation de donnée et donc un meilleur traitement. Le travail de Amine BENOUCIEF se porte sur certaines des fonctionnalités principales du paquet.  
+[Le Github évalué](https://github.com/benben62/PSBX/blob/main/GR03_BENOUCIEF_Amine_Dplyr.pdf)
+
+## a. Commentaire
+
+dplyr est une grammaire de manipulation de données, fournissant un ensemble cohérent de verbes qui vous aident à résoudre les défis de manipulation de données les plus courants:
+
+```{r}
+#Nous essayerons d'utiliser le package Dplyr au maximum grâce a des exemples.
+#install.packages("dplyr")
+library(dplyr)
+#install.packages("questionr")
+library(questionr)
+data(hdv2003)
+rest <- hdv2003
+#install questionr et biblio pour data hdv2003
+#On commance avec la cmd Filtre() >, <, == exemple :
+rest1 <- filter(rest, age >20)
+head(rest1)
+rest2 <- filter(rest,age == 22)
+head(rest2)
+#Filtre aussi les mots
+rest3 <- filter(rest, sport=='Non')
+head(rest3)
+#On peut aussi appliquer un filtre sur les 2
+rest4 <- filter(rest, age >20 & sport == 'Non')
+head(rest4)
+#ou
+rest5 <- filter(rest, age >20 , sport == 'Non')
+head(rest5)
+#Et on ajoute 3 critères aussi !
+rest6 <- filter(rest, age >20 ,sexe =='Femme', sport == 'Non')
+head(rest6)
+#creer des intervalles
+rest7 <- filter(rest,age >= 22, age <= 30)
+head(rest7)
+#faire une selection multiple
+rest8 <- filter(rest,age %in% c(20,22,60))
+head(rest8)
+# faire une selection multiple pour des elements different de 
+rest9 <- filter(rest,!age %in% c(20,22,60))
+head(rest9)
+rm(list = ls())
+#Command Mutate ()
+data(hdv2003)
+rest <- hdv2003
+#Creer une colonne avec age*10
+rest1 <- mutate(rest, age*10)
+head(rest1)
+#creer une colonne avec une difference 
+head <- mutate(rest, diff= age-freres.soeurs)
+#creer une variable loi normal 
+y <- rnorm(2000,0,1)
+#attribué a chaque ligne 
+rest3 <- mutate(rest, nouv_var=y)
+head(rest3)
+rm(list = ls())
+# Command Arrange()
+data(hdv2003)
+rest <- hdv2003
+#Ranger les colonnes de facon croissante 
+rest1 <- arrange(rest, age)
+head(rest1)
+#Ranger les colonnes de façon decroissante 
+rest2 <- arrange(rest, desc(age))
+head(rest2)
+#Ranger une colonne non numerique Z à A
+rest3 <- arrange (rest, qualif)
+head(rest3)
+#Ranger une colonne non numerique A à Z
+rest4 <- arrange (rest, desc(qualif))
+head(rest4)
+#ranger plusieurs colonne 
+rest5 <- arrange(rest,nivetud,age)
+head(rest5)
+#ranger plusieurs colonne l'une asc et l'autre desc
+rest6 <- arrange(rest,nivetud,desc(age))
+head(rest6)
+rm(list = ls())
+```
+
+***Bibliographie***
+
+
+https://bookdown.org/fousseynoubah/dswr_book/transformer-de-donnees-avec-dplyr.html
+
+https://atrebas.github.io/post/2019-03-03-datatable-dplyr/#filter-rows
+
+https://antoinesir.rbind.io/post/comparaisons-base-r-dplyr-data-table/
+
+https://juba.github.io/tidyverse/10-dplyr.html
+
+## b. Notation 
+
+Critère 1 : 3/4 Visuel agréable
+
+Critère 2 : 3/4 Fonction bien expliqué 
+
+Critère 3 : 3/4 Le code fonctionne.
+
+Critère 4 : 3/4 Présentation lisible.
+
+Critère 5 : 4/4 Explication simple et concise. 
+
+# III. Conclusion
+
+Note globale de 17/20. Bon travail qui exlique bien le package dplyr. Les commentaires aurait pu etre mieux positionné. Bibliographie présente

@@ -1,0 +1,183 @@
+---
+title: "AstéRix_alexandre_kadaoui_pracma"
+author: "Teddy Leandre"
+date: "23/12/2020"
+output: html_document
+latex_engine: xelatex
+word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Présentation
+*Dans ce dossier, nous chercherons à évaluer 12 travaux comportant du code R et des concepts mathématiques. L'évaluation se fera sur la base de 5 critères de notation qui, additionné donnera une note globale sur 20 points. *  
+  
+1. Qualité du visuel du document sur 4 points  
+2. Pluralité des fonctionnalités sur 4 points    
+3. Fonctionnement du code sur 4 points
+4. Lisibilité du code sur 4 points  
+5. Qualité des explications sur 4 points      
+  
+# II. Description
+Ici nous verrons l'outil `pracma`, c'est un paquet qui permet d'effectuer des calculs mathématiques avancées. Le travail de Alexandre KADAOUI se porte sur certaines des fonctionnalités principales du paquet.  
+[Le Github évalué](https://github.com/Kadaluck/PSB2020_R/blob/main/gr01_kadaoui_alexandre_pracma.Rmd)
+
+## a. Commentaire
+
+ Ce package fournit des implémentations R de fonctions plus avancées en analyse numérique, avec une vue spéciale sur l'optimisation et les routines de séries chronologiques. Utilise les noms de fonction Matlab / Octave le cas échéant pour simplifier le portage.
+
+Certaines de ces implémentations sont le résultat de cours sur le calcul scientifique (`` Wissenschaftliches Rechnen '') et sont principalement destinées à démontrer comment implémenter certains algorithmes en R / S. D'autres sont des implémentations d'algorithmes trouvés dans les manuels.
+## Détails :
+Le package comprend des fonctions de tous les domaines de l'analyse numérique, par exemple:
+Recherche de racines et minimisation des fonctions univariées, par exemple Newton-Raphson, Brent-Dekker, Fibonacci ou recherche de «nombre d'or». 
+<br> Manipulation des polynômes, y compris les racines et l'ajustement polynomial,par exemple les méthodes de Laguerre et Muller.
+<br> Interpolation et approximation de fonction,interpolation de Lagrange barycentrique , interpolation Pade et rationnelle, Chebyshev ou approximation trigonométrique.
+<br> Certaines fonctions spéciales,par exemple les intégrales de Fresnel, le Zeta de Riemann ou la fonction Gamma complexe, et le W de Lambert calculé de manière itérative par la méthode de Newton.
+<br> Matrices spéciales, par exemple Hankel, Rosser, Wilkinson
+<br> Différenciation et intégration numériques,approche de Richardson et dérivés de `` pas complexes '', intégration adaptative de Simpson et Lobatto et quadrature adaptative de Gauss-Kronrod.
+<br> Solveurs pour les équations et systèmes différentiels ordinaires,Euler-Heun, Runge-Kutta classique, ode23, ou méthode prédicteur-correcteur comme Adams-Bashford-Moulton.
+<br> Certaines fonctions de la théorie des nombres,telles que les nombres premiers et la factorisation des nombres premiers, l'algorithme euclidien étendu.
+<br> Routines de tri, par exemple quickstep récursif.
+<br> Plusieurs fonctions pour la manipulation de chaînes et la recherche régulière, toutes enveloppées et nommées de la même manière que leurs analogues Matlab.
+
+## Les Buts : 
+Il sert trois objectifs principaux:
+
+<br> Collecter des scripts R qui peuvent être démontrés dans des cours sur l'analyse numérique ou le calcul scientifique en utilisant R / S comme langage de programmation choisi.
+<br> Emballage des fonctions avec les noms Matlab appropriés pour simplifier le portage des programmes de Matlab ou Octave vers R.
+<br> Fournir un environnement dans lequel R peut être utilisé comme un système de calcul numérique à part entière.
+
+
+
+
+
+## La fonction : barylag2d
+
+Interpolation de Lagrange barycentrique bidimensionnelle.  
+
+Les nombres ai s'appellent les points d'interpolations ou encore noeuds d'interpolations.  
+<br> Lorsque fi = f(ai), la fonction f est la fonction interpole.  
+
+On dit aussi que les valeurs f(ai) sont les valeurs interpol?es L'unique polynome p ??? Pd vérifiant p(ai) = f(ai) (i = 0,1,...,d) s'appelle alors le polyn?me
+d'interpolation de Lagrange de f aux points ai
+. Il est not? L[a0,...,ad; f ] ou
+bien L[A; f ].
+Cette derni?re notation est parfaitement valable car le polyn?me d'interpolation de Lagrange d?pend uniquement de l'ensemble des points et non de la
+mani?re dont les points sont ordonn?s. Une mani?re un peu sophistiqu?e de traduire cette propri?t? est la suivante : si ?? est une permutation??? quelconque des
+indices 0,1,...,d alors L[a0,...,ad; f ] = L[a??(0)
+,...,a??(d)
+; f ].
+Les polyn?mes ???i s'appellent les polyn?mes fondamentaux de Lagrange.
+En utilisant le symbole ??? qui est l'?quivalent pour le produit de ce que ??? est
+??? Une permutation des indices 0,1,...,d est une bijection de l'ensemble{0,1,...,d} dans luim?me.
+[TH 1] jpc / ALG
+? 1. INTRODUCTION ? L'INTERPOLATION POLYNOMIALE 5
+pour la somme, on a la formule suivante qui est une variante compacte de (1.9).
+???i(x) =
+d
+???
+j=0, j6=i
+x???aj
+ai ???aj
+. (1.10)
+Avec ces nouvelles notations, l'expression (1.8) devient
+L[a0,...,ad; f ](x) =
+d
+???
+i=0
+f(ai)
+d
+???
+j=0, j6=i
+x???aj
+ai ???aj
+. (1.11)
+Cette expression de L[A; f ] est connue sous le nom de formule d'interpolation
+de Lagrange.
+d) Propri?t?s alg?briques et lin?arit?
+Il est essentiel de retenir l'?quivalence suivante
+p ??? Pd
+p(ai) = f(ai) i = 0,...,d
+?
+??? p = L[a0,...,ad; f ] (1.12)
+En particulier,
+si p ??? Pd alors L[a0,...,ad; p] = p.
+Il faut prendre garde que cette propri?t? n'est valable que lorsque le degr? de p
+est inf?rieur o? ?gal ? d.
+Cette relation implique des propri?t?s alg?briques int?ressantes sur les polyn?mes ???i
+. Par exemple, en utilisant que, quel que soit le nombre de points, le
+polyn?me constant ?gal ? 1 est son propre polynome d'interpolation on a
+d
+???
+i=0
+???i = 1. 
+
+
+
+
+a{n + 1} = (a_n + b_n) / 2 
+b{n + 1} = sqrt (a_n + b_n)
+
+
+
+
+Lorsqu'elle est utilisée pour des nombres négatifs ou complexes, la fonction racine carrée complexe est appliquée.
+
+
+
+install.packages("pracma")
+library(pracma)
+agmean(a,b)
+#avec a et b deux vecteurs de nombres réels ou complexes de meme longueur ( ou scalaire)
+
+
+
+## Exemples : 
+
+##  Example from R-help
+xn <- c(4.05, 4.10, 4.15, 4.20, 4.25, 4.30, 4.35)
+yn <- c(60.0, 67.5, 75.0, 82.5, 90.0)
+foo <- matrix(c(
+        -137.8379, -158.8240, -165.4389, -166.4026, -166.2593,
+        -152.1720, -167.3145, -171.1368, -170.9200, -170.4605,
+        -162.2264, -172.5862, -174.1460, -172.9923, -172.2861,
+        -168.7746, -175.2218, -174.9667, -173.0803, -172.1853,
+        -172.4453, -175.7163, -174.0223, -171.5739, -170.5384,
+        -173.7736, -174.4891, -171.6713, -168.8025, -167.6662,
+        -173.2124, -171.8940, -168.2149, -165.0431, -163.8390),
+            nrow = 7, ncol = 5, byrow = TRUE)
+xf <- c(4.075, 4.1)
+yf <- c(63.75, 67.25)
+barylag2d(foo, xn, yn, xf, yf)
+#  -156.7964 -163.1753
+#  -161.7495 -167.0424
+# Find the minimum of the underlying function
+bar <- function(xy) barylag2d(foo, xn, yn, xy[1], xy[2])
+optim(c(4.25, 67.5), bar)  # "Nelder-Mead"
+# $par
+# 4.230547 68.522747
+# $value
+# -175.7959
+
+***
+
+
+
+
+## b. Notation
+
+Critère 1 : 1/4 Visuel peu agréable. 
+
+Critère 2 : 3/4 Différentes fonctionalités présentés   
+
+Critère 3 : 4/4 le code fonctionne bien. 
+
+Critère 4 : 1/4 code illisible.
+
+Critère 5 :  2/4 Explication assez complexe.
+
+# III. Conclusion
+
+Note globale de 11/20 . Bon travail qui explique  pracma mais la présentation laisse à désirer. 
