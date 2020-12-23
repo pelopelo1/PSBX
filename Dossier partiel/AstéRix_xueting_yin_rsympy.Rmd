@@ -1,0 +1,74 @@
+---
+title: Les 12 travaux d'astéRix_xueting_yin_rSymPy
+output: html_document
+author: Teddy Leandre
+date: 23/12/2020
+header-includes:
+   - \usepackage{bbm}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# I.**Présentation**
+*Dans ce dossier, nous chercherons à évaluer 12 travaux comportant du code R et des concepts mathématiques. L'évaluation se fera sur la base de 5 critères de notation qui, additionné donnera une note globale sur 20 points. *  
+  
+1. Qualité du visuel du document sur 4 points  
+2. Pluralité des fonctionnalités sur 4 points    
+3. Fonctionnement du code sur 4 points
+4. Qualité des explications sur 4 points  
+5. Lisibilité du code sur 4 points   
+    
+  
+# II. Description
+Ici nous verrons l'outil `Rsympy`, c'est un paquet qui permet d'effectuer certains calculs. Le travail de Xueting YIN se porte sur certaines des fonctionnalités principales du paquet.  
+[Le Github évalué](https://github.com/yinxueting/PSBX/blob/main/gr01_xueting_yin_rSymPy.pdf)  
+  
+##   a. Commentaire
+```{r echo=FALSE}
+install.packages("rJython")
+library(rJython)
+install.packages("rJava")
+library(rJava)
+install.packages("rSymPy")# install.packages("rSymPy")
+library(rSymPy) #chargement de package
+x <- Var("x")
+x+x+x  # addition
+x*x # au carré
+2*x # multiplication
+y <- Var("3*x")
+y/x # division
+y*x
+z <- Var("x**2")
+x*y+z
+```
+
+
+**Ex2**
+```{r}
+sympy("sqrt(100).evalf()") # racine carré
+sympy("sqrt(100).evalf(30)") # 30 décimales
+sympy("pi.evalf(100)") #100 décimales
+sympy("expand((x + 2)*(x - 3))") # équation
+```
+
+**Ex3**
+```{r}
+sympy("y = x*x")
+sympy("A = Matrix([[1,x], [y,1]])")
+sympy("A**2")
+```
+
+## Notation  
+  
+Critère 1 : 3/4 Peut etre ameliorer. 
+
+Critère 2 : 3/4 Utilisation de fonctions essentiels mais reste simple. 
+
+Critère 3 : 4/4 tout fonctionne.
+
+Critère 4 : 3/4 Explications bref sur certaines lignes, voir pas d'explications pour certaines fonctions. Des commentaires supplementaires peuvent etre ajoutes.
+
+Critère 5 : 3/4 très simple et lisible.

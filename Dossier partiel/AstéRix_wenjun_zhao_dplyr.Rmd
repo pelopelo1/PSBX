@@ -1,0 +1,107 @@
+---
+title: "AstéRix_wenjun_zhao_dplyr"
+author: "Teddy Leandre"
+date: "23/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Présentation
+*Dans ce dossier, nous chercherons à évaluer 12 travaux comportant du code R et des concepts mathématiques. L'évaluation se fera sur la base de 5 critères de notation qui, additionné donnera une note globale sur 20 points. *  
+  
+1. Qualité du visuel du document sur 4 points  
+2. Pluralité des fonctionnalités sur 4 points    
+3. Fonctionnement du code sur 4 points
+4. Lisibilité du code sur 4 points  
+5. Qualité des explications sur 4 points      
+  
+# II. Description
+Ici nous verrons l'outil `dplyr`, c'est un paquet qui permet d'effectuer certaines manipulation de donnée et donc un meilleur traitement. Le travail de Wenjun Zhao se porte sur certaines des fonctionnalités principales du paquet.  
+[Le Github évalué](https://github.com/claudia0524/PSBX/blob/main/gr03_Wenjun_ZHAO_R/gr03_Wenjun_ZHAO_dplyr.pdf)
+
+## a. Commentaire
+
+dplyr est une grammaire de manipulation de données, fournissant un ensemble cohérent de verbes qui vous aident à résoudre les défis de manipulation de données les plus courants:
+
+**mutate ()**  ajoute de nouvelles variables qui sont des fonctions de variables existantes
+
+**select ()**  sélectionne les variables en fonction de leurs noms.
+  
+**filter ()**  sélectionne les observations en fonction de leurs valeurs.
+  
+**summary ()**  réduit plusieurs valeurs à un seul résumé.
+  
+**arrange ()**  modifie l'ordre des lignes.
+
+Tout cela se combine naturellement avec *group_by ()* qui vous permet d'effectuer n'importe quelle opération «par groupe». Vous pouvez en savoir plus sur eux dans *vignette ("dplyr")*. En plus de ces verbes à table unique, dplyr fournit également une variété de verbes à deux tables, que vous pouvez découvrir en *vignette ("two-table")*.
+
+dplyr est conçu pour résumer la manière dont les données sont stockées. Cela signifie qu'en plus de travailler avec des trames de données locales, vous pouvez également travailler avec des tables de base de données distantes, en utilisant exactement le même code R. Installez le package dbplyr puis lisez *vignette ("databases", package = "dbplyr")*.
+
+**Installation**
+
+Le moyen le plus simple d'obtenir dplyr est d'installer tout le tidyverse:
+
+*install.packages ("tidyverse")*
+
+Alternativement, installez simplement dplyr:
+
+*install.packages ("dplyr")*
+
+Ou la version de développement de GitHub:
+
+*install.packages ("devtools")*
+
+*devtools :: install_github ("tidyverse / dplyr")*
+
+**Utilisation**
+
+```{r}
+library(dplyr)
+starwars %>% 
+  filter(species == "Droid")
+```
+```{r}
+library(dplyr)
+starwars %>% 
+  select(name, ends_with("color"))
+```
+```{r}
+library(dplyr)
+starwars %>% 
+  mutate(name, bmi = mass / ((height / 100)  ^ 2)) %>%
+  select(name:mass, bmi)
+```
+```{r}
+library(dplyr)
+starwars %>% 
+  arrange(desc(mass))
+```
+```{r}
+library(dplyr)
+starwars %>%
+  group_by(species) %>%
+  summarise(
+    n = n(),
+    mass = mean(mass, na.rm = TRUE)
+  ) %>%
+  filter(n > 1)
+```
+
+## b. Notation 
+
+Critère 1 : 4/4 Visuel agréable
+
+Critère 2 : 4/4 Fonction bien expliqué 
+
+Critère 3 : 4/4 Le code fonctionne.
+
+Critère 4 : 2/4 Présentation abrupte du paquet.
+
+Critère 5 : 3/4 Explication assez claire. 
+
+# III. Conclusion
+
+Note globale de 17/20. Bon travail qui exlique bien le package dplyr. Les commentaires aurait pu etre mieux positionné.

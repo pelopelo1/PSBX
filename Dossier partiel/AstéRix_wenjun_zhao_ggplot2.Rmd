@@ -1,0 +1,69 @@
+---
+title: "Les 12 travaux d'astéRix_wenjun_zhao_ggplot2"
+author: "Teddy Leandre"
+date: "23/12/2020"
+output:
+  html_document: default
+  pdf_document: default
+header-includes: \usepackage{bbm}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# I. Présentation
+*Dans ce dossier, nous chercherons à évaluer 12 travaux comportant du code R et des concepts mathématiques. L'évaluation se fera sur la base de 5 critères de notation qui, additionné donnera une note globale sur 20 points. *  
+  
+1. Qualité du visuel du document sur 4 points  
+2. Pluralité des fonctionnalités sur 4 points    
+3. Fonctionnement du code sur 4 points
+4. Lisibilité du code sur 4 points  
+5. Qualité des explications sur 4 points      
+  
+# II. Description
+Ici nous verrons l'outil `ggplot2`, c'est un paquet qui permet d'effectuer certaines représentation graphique. Le travail de Wenjun ZHAO se porte sur certaines des fonctionnalités principales du paquet.  
+[Le Github évalué](https://github.com/claudia0524/PSBX/blob/main/gr03_Wenjun_ZHAO_R/gr03_Wenjun_ZHAO_ggplot2.pdf) 
+
+## a. Commentaire
+
+ggplot2 est un package de data visualisation qui ameliore la qualite et l'esthetique des graphiques. C'est un bon travail qui resume bien les fonctionnalite du package. Wenjun a su bien expliquer ses lignes de codes. Cependant d'autres type de visuel aurait pu etre integrer au code pour mettre en valeur la richesse et la variete de ggplot2. De meme, pas de bibliographie nous ne savons pas si elle s'est inspiree d`un travail ou elle a cree elle meme ses examples (si oui il fallait le preciser).  
+# Overview  
+ggplot2 est un système de création graphique déclarative, basé sur The Grammar of Graphics. Vous fournissez les données, dites à ggplot2 comment mapper des variables à l'esthétique, quelles primitives graphiques utiliser et il s'occupe des détails.  
+# Installation  
+Le moyen le plus simple d'obtenir ggplot2 est d'installer tout le tidyverse:  
+*install.packages("tidyverse")*  
+Sinon, installez simplement ggplot2:  
+*install.packages("ggplot2")*  
+Ou la version de développement de GitHub:  
+*install.packages ("devtools")*  
+*devtools::install_github("tidyverse/ggplot2")*  
+# Utilisation  
+
+Il est difficile de décrire succinctement le fonctionnement de ggplot2 car il incarne une philosophie profonde de la visualisation. Cependant, dans la plupart des cas, vous commencez avec *ggplot ()*, fournissez un jeu de données et une cartographie esthétique (*avec aes ()*). Vous ajoutez ensuite des couches (*comme geom_point ()* ou *geom_histogram ()*), des échelles (*comme scale_colour_brewer ()*), des spécifications de facettes (*comme facet_wrap ()*) et des systèmes de coordonnées (*comme coord_flip ()*).
+```{r}
+library(ggplot2)
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()
+```
+
+**EVALUATION DU TRAVAIL EN QUESTION**
+
+Critère 1 : 3/4 Fichier clair. 
+
+Critère 2 : 3/4 Description qui marche.  
+
+Critère 3 : 4/4 Code fonctionnel.
+
+Critère 4 : 1/4 très simple et pas assez lisible.
+
+Critère 5 : 3/4 Explication claire et concise.
+
+## b. CONCULSION
+
+Note globale de 14/20 . Bon travail qui exlique rapidement ggplot2. Un peu plus de visuel aurait ete appreciable. 
+
+   
+
+
